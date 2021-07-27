@@ -3,7 +3,7 @@
 name: CI-CD-Pipeline-to-AWS-ElasticBeastalk
 env:
   EB_PACKEGE_S3_BUCKET_NAME: "bohdan-flask-application-packeges"  # AWS name packege
-  EB_APPLICATIN_NAME: "MyFlask"
+  EB_APPLICATION_NAME: "MyFlask"
   EB_ENVIROMENT_NAME: "MyFlask-env"
   DEPLOY_PACKAGE_NAME: "flask_app_${{github.sha}}.zip"
   AWS_REGION_NAME: "eu-central-1"
@@ -32,7 +32,7 @@ jobs:
         run: zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./ -x *.git* #запакувати все крім файлів з розширенням .git
         
       # Authentification with AWS user
-      - name: Cnnfigure my AWS Credentials
+      - name: Configure my AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with: 
             aws-access-key-id    : ${{secrets.MY_AWS_ACCESS_KEY}}
@@ -51,7 +51,7 @@ jobs:
 
     steps:
       # Authentification with AWS user
-      - name: Cnnfigure my AWS Credentials
+      - name: Configure my AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with: 
             aws-access-key-id    : ${{secrets.MY_AWS_ACCESS_KEY}}
